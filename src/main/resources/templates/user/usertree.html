@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>树模块 - layui</title>
+    <link rel="stylesheet" href="/atree/css/layui.css">
+</head>
+<body>
+<ul id="demo"></ul>
+</body>
+<script src="/atree/layui.js"></script>
+<script>
+    layui.use(['atree', 'jquery'], function () {
+        var $ = layui.jquery;
+
+        var nodes ;
+
+        var tree = layui.atree({
+            //指定元素
+            elem: '#demo',
+            //勾选风格
+            check: 'checkbox',
+            //设定皮肤
+            skin: 'as',
+            spreadAll: false,
+            props: {
+                name: 'name',
+                id: 'id',
+                children: 'children',
+                checkbox: 'checkbox',
+                user: 'isUser',
+            },
+            change: function (val) {
+                var names = [];
+                var ids = [];
+                for (var i = 0; i < val.length; i++) {
+                    if (!val[i].children && val[i].user) {
+                        var name = val[i].name;
+                        var id = val[i].id;
+                        names.push(name);
+                        ids.push(id);
+                    }
+                }
+                console.log(unique(names));
+                console.log(unique(ids));
+                $("#usernames", parent.document).val(unique(names));
+                $("#ids", parent.document).val(unique(ids));
+            },
+            click: function (item) { //点击节点回调
+            },
+            nodes: nodes
+        });
+
+        //获取不重复的数组
+        function unique(array) {
+            var n = {}, r = [], len = array.length, val, type;
+            for (var i = 0; i < array.length; i++) {
+                val = array[i];
+                type = typeof val;
+                if (!n[val]) {
+                    n[val] = [type];
+                    r.push(val);
+                } else if (n[val].indexOf(type) < 0) {
+                    n[val].push(type);
+                    r.push(val);
+                }
+            }
+            return r;
+        }
+    });
+</script>
+
+</html>
