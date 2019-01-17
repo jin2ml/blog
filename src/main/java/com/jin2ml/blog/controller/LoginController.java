@@ -7,6 +7,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,8 +27,8 @@ public class LoginController {
      * @param username 用户名
      * @param password 密码
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Response login(String username, String password) {
+    @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
+    public Response doLogin(String username, String password) {
         Response response = new Response();
         Subject subject = SecurityUtils.getSubject();
         // 在认证提交前准备 token（令牌）
@@ -44,6 +45,11 @@ public class LoginController {
 //        }
         response.setCode(0);
         return response;
+    }
+
+    @GetMapping("login")
+    public String login(){
+        return "login";
     }
 
 

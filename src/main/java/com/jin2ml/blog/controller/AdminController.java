@@ -15,7 +15,7 @@ public class AdminController {
 
     @RequestMapping("")
     public String show(){
-        return "admin/admin";
+        return "admin/index";
     }
 
     @RequestMapping("welcome")
@@ -24,9 +24,9 @@ public class AdminController {
         return "hello";
     }
 
-    @RequestMapping("console")
+    @RequestMapping("home")
     public String console(){
-        return "home/console";
+        return "admin/home";
     }
 
     @GetMapping("about")

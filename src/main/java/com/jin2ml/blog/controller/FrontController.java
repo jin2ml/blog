@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date 2018/9/27
  */
 @Controller
-@RequestMapping
+@RequestMapping("home")
 public class FrontController {
 
     @Autowired
